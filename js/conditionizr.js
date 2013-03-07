@@ -15,28 +15,27 @@
 	var doc = document;
 	var docEl = doc.documentElement;
 	docEl.id = 'conditionizr';
-	var baseBrowserSettings = { scripts: false, styles: false, classes: true, customScript: false };
 	settings = {
 		debug     : false,
 		scriptSrc : 'js/conditionizr/',
 		styleSrc  : 'css/conditionizr/',
 		ieLessThan: { active: false, version: '9', scripts: false, styles: false, classes: true, customScript: false },
-		chrome    : baseBrowserSettings,
-		safari    : baseBrowserSettings,
-		opera     : baseBrowserSettings,
-		firefox   : baseBrowserSettings,
-		ie10      : baseBrowserSettings,
-		ie9       : baseBrowserSettings,
-		ie8       : baseBrowserSettings,
-		ie7       : baseBrowserSettings,
-		ie6       : baseBrowserSettings,
-		retina    : baseBrowserSettings,
+		chrome    : { scripts: false, styles: false, classes: true, customScript: false },
+		safari    : { scripts: false, styles: false, classes: true, customScript: false },
+		opera     : { scripts: false, styles: false, classes: true, customScript: false },
+		firefox   : { scripts: false, styles: false, classes: true, customScript: false },
+		ie10      : { scripts: false, styles: false, classes: true, customScript: false },
+		ie9       : { scripts: false, styles: false, classes: true, customScript: false },
+		ie8       : { scripts: false, styles: false, classes: true, customScript: false },
+		ie7       : { scripts: false, styles: false, classes: true, customScript: false },
+		ie6       : { scripts: false, styles: false, classes: true, customScript: false },
+		retina    : { scripts: false, styles: false, classes: true, customScript: false },
 		mac       : true,
 		win       : true,
 		x11       : true,
 		linux     : true
 	};
-	
+
 	function conditionizrMerge(obj1, obj2) {
 		for (var p in obj2) {
 			try {
