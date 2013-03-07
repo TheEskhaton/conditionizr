@@ -12,24 +12,25 @@
 	
 */
 ; var conditionizr = function (options) {
-
-	document.documentElement.id = 'conditionizr';
-	
-	var settings = {
+	var doc = document;
+	var docEl = doc.documentElement;
+	docEl.id = 'conditionizr';
+	var baseBrowserSettings = { scripts: false, styles: false, classes: true, customScript: false };
+	settings = {
 		debug     : false,
 		scriptSrc : 'js/conditionizr/',
 		styleSrc  : 'css/conditionizr/',
 		ieLessThan: { active: false, version: '9', scripts: false, styles: false, classes: true, customScript: false },
-		chrome    : { scripts: false, styles: false, classes: true, customScript: false },
-		safari    : { scripts: false, styles: false, classes: true, customScript: false },
-		opera     : { scripts: false, styles: false, classes: true, customScript: false },
-		firefox   : { scripts: false, styles: false, classes: true, customScript: false },
-		ie10      : { scripts: false, styles: false, classes: true, customScript: false },
-		ie9       : { scripts: false, styles: false, classes: true, customScript: false },
-		ie8       : { scripts: false, styles: false, classes: true, customScript: false },
-		ie7       : { scripts: false, styles: false, classes: true, customScript: false },
-		ie6       : { scripts: false, styles: false, classes: true, customScript: false },
-		retina    : { scripts: false, styles: false, classes: true, customScript: false },
+		chrome    : baseBrowserSettings,
+		safari    : baseBrowserSettings,
+		opera     : baseBrowserSettings,
+		firefox   : baseBrowserSettings,
+		ie10      : baseBrowserSettings,
+		ie9       : baseBrowserSettings,
+		ie8       : baseBrowserSettings,
+		ie7       : baseBrowserSettings,
+		ie6       : baseBrowserSettings,
+		retina    : baseBrowserSettings,
 		mac       : true,
 		win       : true,
 		x11       : true,
@@ -59,20 +60,20 @@
 		
 		for (var resourceType in browserSettings) {
 			var val = browserSettings[resourceType];
-			var head = document.getElementsByTagName('head')[0];
+			var head = doc.getElementsByTagName('head')[0];
 			
 			if (resourceType === 'classes' && val) {
-				document.documentElement.className += ' ' + theBrowser;
+				docEl.className += ' ' + theBrowser;
 			}
 			
 			if (resourceType === 'scripts' && val) {
-				var scriptTag = document.createElement('script');
+				var scriptTag = doc.createElement('script');
 				scriptTag.src = settings.scriptSrc + theBrowser + '.js';
 				head.appendChild(scriptTag);
 			}
 			
 			if (resourceType === 'styles' && val) {
-				var linkTag = document.createElement('link');
+				var linkTag = doc.createElement('link');
 				linkTag.rel = 'stylesheet';
 				linkTag.href = settings.styleSrc + theBrowser + '.css';
 				head.appendChild(linkTag);
@@ -82,7 +83,7 @@
 				var strip = browserSettings.customScript.replace(/\s/g, '');
 				var customSplit = strip.split(',');
 				for(var i = 0; i < customSplit.length; i++) {
-					var customScriptTag = document.createElement('script');
+					var customScriptTag = doc.createElement('script');
 					customScriptTag.src = customSplit[i];
 					head.appendChild(customScriptTag);
 				}
@@ -162,7 +163,7 @@
 		conditionizrLoader();
 		
 	} else {
-		document.documentElement.className += ' no-retina';
+		docEl.className += ' no-retina';
 	}
 	
 	var oSys = [
@@ -181,7 +182,7 @@
 			var theOS = currentPlatform.testWith;
 			
 			if (osSettings) {
-				document.documentElement.className += ' ' + currentPlatform.testWith.toLowerCase();
+				docEl.className += ' ' + currentPlatform.testWith.toLowerCase();
 			}
 			break;
 		}
